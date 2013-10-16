@@ -1,12 +1,13 @@
 from distutils.core import setup
-from pygments_myextra import __version__, __author__, __author_email__
+import pygments_myextra 
 
 setup(
     name             = "pygments_myextra",
-    version          = __version__,
-    author           = __author__,
-    author_email     = __author_email__,
+    version          = pygments_myextra.__version__,
+    author           = pygments_myextra.__author__,
+    author_email     = pygments_myextra.__author_email__,
     description      = "extra pygments lexters",
+    long_description = pygments_myextra.__doc__
     packages         = ["pygments_myextra"],
     install_requires = ["pygments"],
     entry_points     = """
