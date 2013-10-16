@@ -7,7 +7,7 @@ setup(
     author           = pygments_myextra.__author__,
     author_email     = pygments_myextra.__author_email__,
     description      = "extra pygments lexters",
-    long_description = pygments_myextra.__doc__
+    long_description = pygments_myextra.__doc__,
     packages         = ["pygments_myextra"],
     install_requires = ["pygments"],
     entry_points     = """
