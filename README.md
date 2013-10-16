@@ -1,4 +1,4 @@
-# pygments_myextra
+# pygments-myextra
 
 pygments extra lexers
 
