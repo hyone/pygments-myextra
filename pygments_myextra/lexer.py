@@ -299,7 +299,7 @@ class CoffeeScriptConsoleLexer(GenericConsoleLexer):
     filenames = ['*.coffeecon']
     mimetypes = ['text/x-coffeescript-shellsession']
 
-    _prompt_re = re.compile('^(?:coffee> )')
+    _prompt_re  = re.compile('^(?:coffee> |------> |\.\.\.\.\.\.\. )')
     _comment_re = re.compile('^\s*#')
 
     LangLexer = CoffeeScriptLexer
