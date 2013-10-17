@@ -7,8 +7,6 @@ from pygments.token  import Generic, Comment
 line_re  = re.compile('.*?\n')
 
 class GenericConsoleLexer(Lexer):
-    """
-    """
     name = ''
     aliases = []
     filenames = []
@@ -57,28 +55,28 @@ class GenericConsoleLexer(Lexer):
 
 class PerlConsoleLexer(GenericConsoleLexer):
     """
-    For Perl interactive console (pirl, re.pl) output like:
+    Perl interactive console (pirl, re.pl)
 
-    .. sourcecode:: plcon
+    # pirl:
+    >>> tokens = PerlConsoleLexer().get_tokens_unprocessed('''
+    ... pirl @> @a = (1,2,3,4,5)
+    ... (1, 2, 3, 4, 5)
+    ... pirl @> \@a
+    ... [1, 2, 3, 4, 5]
+    ... ''')
 
-    # pirl
-    pirl @> @a = (1,2,3,4,5)
-    (1, 2, 3, 4, 5)
-    pirl @> \@a
-    [1, 2, 3, 4, 5]
-
-    or
-
-    # re.pl
-    $ my $a = 22
-    22
+    # re.pl:
+    >>> tokens = PerlConsoleLexer().get_tokens_unprocessed('''
+    ... $ my $a = 22
+    ... 22
+    ... ''')
     """
-    name = 'Perl Console Session'
-    aliases = ['pirl', 'repl', 'plcon']
+    name      = 'Perl Console Session'
+    aliases   = ['pirl', 'repl', 'plcon']
     filenames = ['*.pirl']
     mimetypes = ['text/x-perl-shellsession']
 
-    _prompt_re = re.compile('^(?:pirl @> |\$ )')
+    _prompt_re  = re.compile('^(?:pirl @> |\$ )')
     _comment_re = re.compile('^\s*#')
 
     LangLexer = PerlLexer
@@ -86,22 +84,22 @@ class PerlConsoleLexer(GenericConsoleLexer):
 
 class EmacsLispConsoleLexer(GenericConsoleLexer):
     """
-    For EmacsLisp interactive console output like:
+    EmacsLisp interactive console
 
-    .. sourcecode:: clcon
-
-    > (setq x 200)
-    > (symbol-value 'x)
-    200
-    > (fset 'x 300)
-    300
+    >>> tokens = EmacsLispConsoleLexer().get_tokens_unprocessed('''
+    ... > (setq x 200)
+    ... > (symbol-value 'x)
+    ... 200
+    ... > (fset 'x 300)
+    ... 300
+    ... ''')
     """
-    name = 'EmacsLisp Console Session'
-    aliases = ['clcon']
+    name      = 'EmacsLisp Console Session'
+    aliases   = ['clcon']
     filenames = ['*.clcon']
     mimetypes = ['text/x-emacslisp-shellsession']
 
-    _prompt_re = re.compile('>>> |\.\.\. ')
+    _prompt_re  = re.compile('>>> |\.\.\. ')
     _comment_re = re.compile('^\s*;')
 
     LangLexer = CommonLispLexer
@@ -109,22 +107,22 @@ class EmacsLispConsoleLexer(GenericConsoleLexer):
 
 class SchemeConsoleLexer(GenericConsoleLexer):
     """
-    For EmacsLisp interactive console output like:
+    EmacsLisp interactive console
 
-    .. sourcecode:: schemecon
-
-    gosh> (define x 200)
-    gosh> x
-    200
-    gosh:1> (string->number "9997")
-    9997
+    >>> tokens = SchemeConsoleLexer().get_tokens_unprocessed('''
+    ... gosh> (define x 200)
+    ... gosh> x
+    ... 200
+    ... gosh:1> (string->number "9997")
+    ... 9997
+    ... ''')
     """
-    name = 'Scheme Console Session'
-    aliases = ['schemecon', 'scmcon', 'gosh']
+    name      = 'Scheme Console Session'
+    aliases   = ['schemecon', 'scmcon', 'gosh']
     filenames = ['*.schemecon']
     mimetypes = ['text/x-scheme-shellsession']
 
-    _prompt_re = re.compile('gosh(?::\d+)?> |\.\.\. ')
+    _prompt_re  = re.compile('gosh(?::\d+)?> |\.\.\. ')
     _comment_re = re.compile('^\s*;')
 
     LangLexer = SchemeLexer
@@ -132,27 +130,27 @@ class SchemeConsoleLexer(GenericConsoleLexer):
 
 class ClojureConsoleLexer(GenericConsoleLexer):
     """
-    For Clojure interactive console output like:
+    Clojure interactive console
 
-    .. sourcecode:: cljcon
-
-       user=> nil
-       nil
-       user=> "Hello, World"
-       "Hello, World"
-       user=> 'x
-       x
-       user=> (def x 22)
-       #'user/x
-       user=> x
-       22
+    >>> tokens = ClojureConsoleLexer().get_tokens_unprocessed('''
+    ... user=> nil
+    ... nil
+    ... user=> "Hello, World"
+    ... "Hello, World"
+    ... user=> 'x
+    ... x
+    ... user=> (def x 22)
+    ... #'user/x
+    ... user=> x
+    ... 22
+    ... ''')
     """
-    name = 'Clojure Console Session'
-    aliases = ['cljcon']
+    name      = 'Clojure Console Session'
+    aliases   = ['cljcon']
     filenames = ['*.cljcon']
     mimetypes = ['text/x-clojure-shellsession']
 
-    _prompt_re = re.compile('^(?:[a-zA-Z0-9.\-]+=?>|\.\.\. )')
+    _prompt_re  = re.compile('^(?:[a-zA-Z0-9.\-]+=?>|\.\.\. )')
     _comment_re = re.compile('^\s*;')
 
     LangLexer = ClojureLexer
@@ -160,23 +158,23 @@ class ClojureConsoleLexer(GenericConsoleLexer):
 
 class CommonLispConsoleLexer(GenericConsoleLexer):
     """
-    For Common Lisp interactive console output like:
+    Common Lisp interactive console
 
-    .. sourcecode:: cclcon
+    >>> tokens = CommonLispConsoleLexer().get_tokens_unprocessed('''
+    ... ? (defun foo (&key x (y 123) (z 456 z-supplied-p))
+    ... .   (pprint (list x y z z-supplied-p)))
+    ... FOO
 
-       ? (defun foo (&key x (y 123) (z 456 z-supplied-p))
-       .   (pprint (list x y z z-supplied-p)))
-       FOO
-
-       ? (foo)
-       (NIL 123 456 NIL)
+    ... ? (foo)
+    ... (NIL 123 456 NIL)
+    ... ''')
     """
-    name = 'Common Lisp Console Session'
-    aliases = ['cclcon']
+    name      = 'Common Lisp Console Session'
+    aliases   = ['cclcon']
     filenames = ['*.cclcon']
     mimetypes = ['text/x-common-lisp-shellsession']
 
-    _prompt_re = re.compile('^(\?|\.) ')
+    _prompt_re  = re.compile('^(\?|\.) ')
     _comment_re = re.compile('^\s*;')
 
     LangLexer = CommonLispLexer
@@ -184,28 +182,28 @@ class CommonLispConsoleLexer(GenericConsoleLexer):
 
 class JavascriptConsoleLexer(GenericConsoleLexer):
     """
-    For Javascript interactive console output like:
+    Javascript interactive console
 
-    .. sourcecode:: jscon
+    >>> tokens = JavascriptConsoleLexer().get_tokens_unprocessed('''
+    ... > o = {  a: 2, b: [1,2,3] }
+    ... [object Object]
+    ... > o['a']
+    ... 2
+    ... ''')
 
-       js> o = {  a: 2, b: [1,2,3] }
-       [object Object]
-       js> o['a']
-       2
-
-       or Firebug Console
-
-       >>> o.a
-       2
-       >>> (function() print("hello world"))()
-       hello world
+    >>> tokens = JavascriptConsoleLexer().get_tokens_unprocessed('''
+    ... >>> o.a
+    ... 2
+    ... >>> (function() print("hello world"))()
+    ... hello world
+    ... ''')
     """
-    name = 'Javascript Console Session'
-    aliases = ['jscon', 'mongo']
+    name      = 'Javascript Console Session'
+    aliases   = ['jscon', 'mongo']
     filenames = ['*.jscon']
     mimetypes = ['text/x-javascript-shellsession']
 
-    _prompt_re = re.compile('^(>|js>|>>>) ')
+    _prompt_re  = re.compile('^(>|js>|>>>) ')
     _comment_re = re.compile('^\s*//')
 
     LangLexer = JavascriptLexer
@@ -213,25 +211,25 @@ class JavascriptConsoleLexer(GenericConsoleLexer):
 
 class ScalaConsoleLexer(GenericConsoleLexer):
     """
-    For Scala interactive console output like:
+    Scala interactive console
 
-    .. sourcecode:: scalacon
+    >>> tokens = ScalaConsoleLexer().get_tokens_unprocessed('''
+    ... scala> var aList = List(1,2,3,4,5)
+    ... aList: List[Int] = List(1, 2, 3, 4, 5)
 
-       scala> var aList = List(1,2,3,4,5)
-       aList: List[Int] = List(1, 2, 3, 4, 5)
+    ... scala> aList ::: List("yama")
+    ... res16: List[Any] = List(1, 2, 3, 4, 5, yama)
 
-       scala> aList ::: List("yama")
-       res16: List[Any] = List(1, 2, 3, 4, 5, yama)
-
-       scala> "ddd" :: aList
-       res17: List[Any] = List(ddd, 1, 2, 3, 4, 5)
+    ... scala> "ddd" :: aList
+    ... res17: List[Any] = List(ddd, 1, 2, 3, 4, 5)
+    ... ''')
     """
-    name = 'Scala Console Session'
-    aliases = ['scalacon']
+    name      = 'Scala Console Session'
+    aliases   = ['scalacon']
     filenames = ['*.scalacon']
     mimetypes = ['text/x-scala-shellsession']
 
-    _prompt_re = re.compile('scala> |\s*\|')
+    _prompt_re  = re.compile('scala> |\s*\|')
     _comment_re = re.compile('^\s*//')
 
     LangLexer = ScalaLexer
@@ -239,21 +237,21 @@ class ScalaConsoleLexer(GenericConsoleLexer):
 
 class HaskellConsoleLexer(GenericConsoleLexer):
     """
-    For Haskell (ghci) interactive console output like:
+    Haskell (ghci) interactive console
 
-    .. sourcecode:: clcon
-
-       Prelude List> any (\\x -> x `mod` 7 == 0) [1..10]
-       True
-       Prelude List> [2,4..10]
-       [2,4,6,8,10]
+    >>> tokens = HaskellConsoleLexer().get_tokens_unprocessed('''
+    ... Prelude List> any (\\x -> x `mod` 7 == 0) [1..10]
+    ... True
+    ... Prelude List> [2,4..10]
+    ... [2,4,6,8,10]
+    ... ''')
     """
-    name = 'Haskell Console Session'
-    aliases = ['haskellcon', 'ghci', 'hugs']
+    name      = 'Haskell Console Session'
+    aliases   = ['haskellcon', 'ghci', 'hugs']
     filenames = ['*.haskellcon']
     mimetypes = ['text/x-haskell-shellsession']
 
-    _prompt_re = re.compile('^[0-9a-zA-Z .*]+>')
+    _prompt_re  = re.compile('^[0-9a-zA-Z .*]+>')
     _comment_re = re.compile('^\s*--')
 
     LangLexer = HaskellLexer
@@ -261,14 +259,14 @@ class HaskellConsoleLexer(GenericConsoleLexer):
 
 class OcamlConsoleLexer(GenericConsoleLexer):
     """
-    For Ocaml interactive console output like:
+    Ocaml interactive console
 
-    .. sourcecode:: ocamlcon
-
-       # sqrt (-1.);;
-       - : float = nan
-       # infinity +. neg_infinity;;
-       - : float = nan
+    >>> tokens = OcamlConsoleLexer().get_tokens_unprocessed('''
+    ... # sqrt (-1.);;
+    ... - : float = nan
+    ... # infinity +. neg_infinity;;
+    ... - : float = nan
+    ''')
     """
     name = 'OCaml Console Session'
     aliases = ['ocamlcon']
@@ -280,21 +278,21 @@ class OcamlConsoleLexer(GenericConsoleLexer):
 
     LangLexer = OcamlLexer
 
+
 class CoffeeScriptConsoleLexer(GenericConsoleLexer):
     """
-    For CoffeeScript interactive console output like:
+    CoffeeScript interactive console
 
-    .. sourcecode:: coffee-con
-
-       # $ coffee
-       coffee> hash = null
-       null
-       coffee> hash or= {}
-       {}
-       coffee> hash = 0
-       0
-       coffee> hash or= {}
-       {}
+    >>> tokens = CoffeeScriptConsoleLexer().get_tokens_unprocessed('''
+    ... coffee> hash = null
+    ... null
+    ... coffee> hash or= {}
+    ... {}
+    ... coffee> hash = 0
+    ... 0
+    ... coffee> hash or= {}
+    ... {}
+    ... ''')
     """
     name = 'CoffeeScript Console Session'
     aliases = ['coffee-con']
@@ -309,26 +307,26 @@ class CoffeeScriptConsoleLexer(GenericConsoleLexer):
 
 class LiveScriptConsoleLexer(GenericConsoleLexer):
     """
-    For LiveScript interactive console output like:
+    LiveScript interactive console
 
-    .. sourcecode:: lscon
-
-       # $ lsc
-       ls> hash = null
-       null
-       ls> hash or= {}
-       {}
-       ls> f = (a, b, c) --> a + b + c
-       [Function]
-       ls> f 2 3 4
-       9
+    >>> tokens = LiveScriptConsoleLexer().get_tokens_unprocessed('''
+    ... # $ lsc
+    ... ls> hash = null
+    ... null
+    ... ls> hash or= {}
+    ... {}
+    ... ls> f = (a, b, c) --> a + b + c
+    ... [Function]
+    ... ls> f 2 3 4
+    ... 9
+    ... ''')
     """
-    name = 'LiveScript Console Session'
-    aliases = ['lscon']
+    name      = 'LiveScript Console Session'
+    aliases   = ['lscon']
     filenames = ['*.lscon']
     mimetypes = ['text/x-livescript-shellsession']
 
-    _prompt_re = re.compile('^(?:ls> |\.\.\. )')
+    _prompt_re  = re.compile('^(?:ls> |\.\.\. )')
     _comment_re = re.compile('^\s*#')
 
     LangLexer = LiveScriptLexer
@@ -336,27 +334,29 @@ class LiveScriptConsoleLexer(GenericConsoleLexer):
 
 class MyRubyConsoleLexer(Lexer):
     """
-    For Ruby interactive console (**irb**) output like:
+    Ruby interactive console
 
-    .. sourcecode:: rbcon
+    >>> tokens = MyRubyConsoleLexer().get_tokens_unprocessed('''
+    ... irb(main):001:0> a = 1
+    ... => 1
+    ... irb(main):002:0> puts a
+    ... 1
+    ... => nil
+    ... ''')
 
-        irb(main):001:0> a = 1
-        => 1
-        irb(main):002:0> puts a
-        1
-        => nil
-
-       [2] pry 1.9.3-p392 (main)> a = 1
-       1
-       [3] pry 1.9.3-p392 (main)> puts a
-       1
-       pry 1.9.3-p392 (main)> a
-       1
-       pry 1.9.3-p392> a
-       1
+    >>> tokens = MyRubyConsoleLexer().get_tokens_unprocessed('''
+    ... [2] pry 1.9.3-p392 (main)> a = 1
+    ... 1
+    ... [3] pry 1.9.3-p392 (main)> puts a
+    ... 1
+    ... pry 1.9.3-p392 (main)> a
+    ... 1
+    ... pry 1.9.3-p392> a
+    ... 1
+    ... ''')
     """
-    name = 'Ruby irb, pry session'
-    aliases = ['myirb', 'pry']
+    name      = 'Ruby irb, pry session'
+    aliases   = ['myirb', 'pry']
     mimetypes = ['text/x-ruby-shellsession']
 
     _prompt_re = re.compile('irb\([a-zA-Z_][a-zA-Z0-9_]*\):\d{3}:\d+[>*"\'] '
@@ -429,7 +429,7 @@ if __name__ == '__main__':
             'lexer' : OcamlConsoleLexer,
         },
         'coffee-con' : {
-            'code' : "coffee> hash = null\nnull\n# coffee> comment\ncoffee> hash = 0",
+            'code' : "coffee> hash = null\nnull\n# coffee> comment\ncoffee> hash = 0\n",
             'lexer' : CoffeeScriptConsoleLexer,
         },
         'lscon' : {
@@ -454,3 +454,6 @@ if __name__ == '__main__':
 
         print "\t-- check html format"
         print "\t", highlight(code, lexer(), HtmlFormatter())
+
+    import doctest
+    doctest.testmod()
