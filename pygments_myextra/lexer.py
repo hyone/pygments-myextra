@@ -164,7 +164,6 @@ class CommonLispConsoleLexer(GenericConsoleLexer):
     ... ? (defun foo (&key x (y 123) (z 456 z-supplied-p))
     ... .   (pprint (list x y z z-supplied-p)))
     ... FOO
-
     ... ? (foo)
     ... (NIL 123 456 NIL)
     ... ''')
@@ -216,10 +215,8 @@ class ScalaConsoleLexer(GenericConsoleLexer):
     >>> tokens = ScalaConsoleLexer().get_tokens_unprocessed('''
     ... scala> var aList = List(1,2,3,4,5)
     ... aList: List[Int] = List(1, 2, 3, 4, 5)
-
     ... scala> aList ::: List("yama")
     ... res16: List[Any] = List(1, 2, 3, 4, 5, yama)
-
     ... scala> "ddd" :: aList
     ... res17: List[Any] = List(ddd, 1, 2, 3, 4, 5)
     ... ''')
@@ -240,7 +237,7 @@ class HaskellConsoleLexer(GenericConsoleLexer):
     Haskell (ghci) interactive console
 
     >>> tokens = HaskellConsoleLexer().get_tokens_unprocessed('''
-    ... Prelude List> any (\\x -> x `mod` 7 == 0) [1..10]
+    ... Prelude List> any (\\\\x -> x `mod` 7 == 0) [1..10]
     ... True
     ... Prelude List> [2,4..10]
     ... [2,4,6,8,10]
@@ -266,7 +263,7 @@ class OcamlConsoleLexer(GenericConsoleLexer):
     ... - : float = nan
     ... # infinity +. neg_infinity;;
     ... - : float = nan
-    ''')
+    ... ''')
     """
     name = 'OCaml Console Session'
     aliases = ['ocamlcon']
