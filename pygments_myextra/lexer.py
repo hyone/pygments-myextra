@@ -346,6 +346,9 @@ class MyRubyConsoleLexer(Lexer):
     ... 1
     ... [3] pry 1.9.3-p392 (main)> puts a
     ... 1
+    ... [4] pry 1.9.3-p392 (main)> cd x
+    ... [4] pry 1.9.3-p392 ("hello"):1> upcase
+    ... "HELLO"
     ... pry 1.9.3-p392 (main)> a
     ... 1
     ... pry 1.9.3-p392> a
@@ -357,7 +360,7 @@ class MyRubyConsoleLexer(Lexer):
     mimetypes = ['text/x-ruby-shellsession']
 
     _prompt_re = re.compile('irb\([a-zA-Z_][a-zA-Z0-9_]*\):\d{3}:\d+[>*"\'] '
-                            '|(?:\[\d+\] )?pry [0-9.]+-p\d+(?: \([a-zA-Z_0-9]+\))?[>*] '
+                            '|(?:\[\d+\] )?pry [0-9.]+-p\d+(?: \([^)]+\))?(?::\d+)?[>*]'
                             '|irb> |pry> '
                             '|>> |\?> ')
 
