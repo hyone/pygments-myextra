@@ -436,8 +436,8 @@ if __name__ == '__main__':
             'code' : "ls> f  =  (a, b, c) -->\n...   a + b + c\n[Function]\nls> f 2 3 4\n9",
             'lexer' : LiveScriptConsoleLexer,
         },
-        'ruby-con' : { 
-            'code' : "irb(main):002:0> puts a\n1\n=> nil\n[2] pry 1.9.3-p392 (main)> a = 1\n1",
+        'myruby-con' : { 
+            'code' : """irb(main):002:0> puts a\n1\n=> nil\n[2] pry 1.9.3-p392 (main)> a = 1\n1\n[2] pry 1.9.3-p392 ("hello"):1> upcase\n""",
             'lexer' : MyRubyConsoleLexer,
         },
     }
