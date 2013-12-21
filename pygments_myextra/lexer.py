@@ -360,7 +360,7 @@ class MyRubyConsoleLexer(Lexer):
     mimetypes = ['text/x-ruby-shellsession']
 
     _prompt_re = re.compile('irb\([a-zA-Z_][a-zA-Z0-9_]*\):\d{3}:\d+[>*"\'] '
-                            '|(?:\[\d+\] )?pry [0-9.]+-p\d+(?: \([^)]+\))?(?::\d+)?[>*]'
+                            '|(?:\[\d+\] )?pry [0-9.]+-p(?:-)?\d+(?: \([^)]+\))?(?::\d+)?[>*]'
                             '|irb> |pry> '
                             '|>> |\?> ')
 
